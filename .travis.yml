@@ -8,3 +8,17 @@ before_install:
 
 script:
   - docker run -e CI=true pieralukasz/sturdy-tribble npm test
+
+deploy:
+  provider: elasticbeanstalk
+  access_key_id:
+    secure: $AWS_ACCESS_KEY_ID
+  secret_access_key:
+    secure: $AWS_SECRET_ACCESS_KEY
+  region: "eu-west-1"
+  app: "SturdyTribble"
+  env: "Sturdytribble-env"
+  bucket_name: "elasticbeanstalk-eu-west-1-003852519182"
+  bucket_path: "SturdyTribble"
+  on:
+    branch: master
